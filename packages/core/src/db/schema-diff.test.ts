@@ -116,4 +116,13 @@ describe("SchemaMismatchError", () => {
 			formatSchemaFinding({ ...issuerDrift, table: "accounts" }, "database"),
 		).toContain("accounts_issuer_accountId_uidx");
 	});
+
+	it("words the fix for the source that holds the schema", () => {
+		expect(formatSchemaFinding(issuerDrift, "prisma")).toContain(
+			"Remove it from the Prisma schema",
+		);
+		expect(formatSchemaFinding(issuerDrift, "drizzle")).toContain(
+			"Remove it from the Drizzle schema",
+		);
+	});
 });
